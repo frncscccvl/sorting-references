@@ -183,7 +183,7 @@ int main(void)
         arrayInt[i] = n;
     }
     
-    bubbleSort(arrayInt, ARRAYLENGTH);
+    //bubbleSort(arrayInt, ARRAYLENGTH);
     //mergeSort(arrayInt, 0, ARRAYLENGTH-1);
     //quickSort(arrayInt, ARRAYLENGTH);
     //insertionSort(arrayInt, ARRAYLENGTH);
@@ -195,9 +195,7 @@ int main(void)
     int binaryfind = binarySearch(arrayInt, 0, ARRAYLENGTH-1, 41);
     
     (binaryfind == -1) ? printf("Element is not in array...\n") : printf("Element is within index %d of array...\n", binaryfind);
-    
-    //printf("%d\n", binaryfind);
-    
+   
     //reverseString(foo);
     //printf("%s\n", foo);
     
