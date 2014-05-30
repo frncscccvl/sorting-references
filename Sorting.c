@@ -1,9 +1,9 @@
 /*
- @  Sorting.c
- @
- @  Created by francis esposito caccavale on 8/13/13.
- @  Copyright (c) 2013 francis esposito caccavale. All rights reserved.
- */
+@  Sorting.c
+@
+@  Created by francis esposito caccavale on 8/13/13.
+@  Copyright (c) 2013 francis esposito caccavale. All rights reserved.
+*/
 
 #define ARRAYLENGTH 20
 
@@ -11,12 +11,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-void swapChar(char *array, int j, int i)
+void swapChar(char *x, char *y)
 {
-    char temp = array[j];
-    array[j] = array[i];
-    array[i] = temp;
+    char temp = *x;
+    *x = *y;
+    *y = temp;
 }
 
 void swap(int array[], int j, int i)
@@ -31,7 +30,7 @@ void reverseString(char *string)
     int length = (strlen(string)-1), i = 0, mid = length/2;
     
     for (i = 0; i <= mid; i++)
-        swapChar(string, i, length - i);
+        swapChar(&string[i], &string[length-i]);
 }
 
 void bubbleSort(int *array, int n)
@@ -127,7 +126,7 @@ void insertionSort(int array[], int n)
             gap--;
         }
         array[gap] = val;
-    }
+    }    
 }
 
 void selectionSort(int array[], int n)
@@ -141,7 +140,7 @@ void selectionSort(int array[], int n)
         for (j = i+1; j < n; j++)
             if (array[j] < array[minIndex])
                 minIndex = j;
-        
+    
         swap(array, i, minIndex);
     }
 }
@@ -171,17 +170,36 @@ int binarySearch(int array[], int lo, int hi, int target)
     return -1;
 }
 
+void permute(char *a, int i, int n)
+{
+    /* (parameter i is beginning index and parameter n is string length.) */
+    
+    int j;
+    if (i == n) {
+        printf("%s\n", a);
+    }
+    else
+    {
+        for (j = i; j <= n; j++)
+        {
+            swapChar((a+i), (a+j));
+            permute(a, i+1, n);
+            swapChar((a+i), (a+j)); //backtrack
+        }
+    }
+}
+ 
 int main(void)
 {
     int arrayInt[ARRAYLENGTH], i = 0, n = 0;
     char foo[60] = "String reversal.";
     srand(NULL);
     
-    for (i = 0; i < ARRAYLENGTH; i++) {
+    /*for (i = 0; i < ARRAYLENGTH; i++) {
         n = rand() % 100;
         printf("Inserting %d into the array...\n", n);
         arrayInt[i] = n;
-    }
+    }*/
     
     //bubbleSort(arrayInt, ARRAYLENGTH);
     //mergeSort(arrayInt, 0, ARRAYLENGTH-1);
@@ -189,15 +207,16 @@ int main(void)
     //insertionSort(arrayInt, ARRAYLENGTH);
     //selectionSort(arrayInt, ARRAYLENGTH);
     
-    for (i = 0; i < ARRAYLENGTH; i++)
+    /*for (i = 0; i < ARRAYLENGTH; i++)
         printf("Sorted array... %d\n", arrayInt[i]);
     
     int binaryfind = binarySearch(arrayInt, 0, ARRAYLENGTH-1, 41);
     
-    (binaryfind == -1) ? printf("Element is not in array...\n") : printf("Element is within index %d of array...\n", binaryfind);
-   
-    //reverseString(foo);
-    //printf("%s\n", foo);
+    (binaryfind == -1) ? printf("Element is not in array...\n") : printf("Element is within index %d of array...\n", binaryfind);*/
+    
+    reverseString(foo);
+    printf("%s\n", foo);
     
     return 0;
 }
+
